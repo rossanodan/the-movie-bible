@@ -26,11 +26,8 @@ li {
 }
 
 li a {
+  color: #FFF;
  text-decoration: none; 
-}
-
-li a:hover {
-  text-decoration: underline;
 }
 
 @media (max-width: 450px) {
