@@ -1,13 +1,14 @@
 .discover {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   // remove scrollbar
   &::-webkit-scrollbar {
     display: none;
   }
   .card {
-    margin: 0 auto;
-    transition: 0.5s;
+    margin: 5px 0;
+    transition: 0.2s;
     &:hover {
       cursor: pointer;
       transform: scale(1.2);
@@ -16,4 +17,8 @@
       max-width: 250px;
     }
   }
+}
+.end {
+  padding: 15px;
+  text-align: center;
 }

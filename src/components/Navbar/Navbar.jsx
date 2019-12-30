@@ -12,7 +12,7 @@ const Navbar = () => {
       <nav> 
         <ul>
           <li className={styles.title}>
-            <NavLink to="/">The Movie Bible</NavLink>
+            <a href="/">The Movie Bible</a>
           </li>
           <li>
             <NavLink to="/discover/movie">Discover</NavLink>

@@ -7,13 +7,11 @@ import Discover from './pages/Discover/Discover';
 import Movie from './pages/Movie/Movie';
 import NotFound from './pages/NotFound/NotFound';
 
-import styles from './App.module.scss';
-
 const App = () => {
   return (
     <div>
       <Navbar />
-      <div className={styles.container}>
+      <div className='container'>
         <Switch>
           <Route exact path='/'>
             <Discover />
