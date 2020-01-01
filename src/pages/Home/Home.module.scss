@@ -1,11 +1,12 @@
-.discover {
-  .paginator {
-    margin: 0 auto;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    button + button {
-      margin-left: 5px;
+.home {
+  .search {
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
+    &:focus {
+      outline: none;
     }
   }
   .grid {

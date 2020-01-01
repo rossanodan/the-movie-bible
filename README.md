@@ -2,7 +2,7 @@
 
 ## Application routing
 
-`/discover/movie`
+`/discover/movie/{page}` with page equal to a number, starting from 1.
 
 Discover movies by different types of data like average rating, number of votes, genres and certifications.
 

@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ThemeContext = React.createContext({
   dark: false,
@@ -48,13 +48,9 @@ export function ThemeProvider (props) {
 
 // styles
 const lightTheme = [
-  '--primary: #6200EE',
-  '--secondary: #FFF',
-  '--text: #000',
+  '--background-color: #FFF'
 ];
 
 const darkTheme = [
-  '--primary: #000',
-  '--secondary: #232F34',
-  '--text: #FFF',
+  '--background-color: #121212'
 ];

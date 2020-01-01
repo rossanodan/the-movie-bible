@@ -1,0 +1,18 @@
+.button {
+  border: 1px solid #069;
+  padding: 10px;
+  color: #069;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: transparent;
+  transition: 0.5s;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    transform: initial;
+    color: #FFF;
+    background-color: #069;
+  }
+}

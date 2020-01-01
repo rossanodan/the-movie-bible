@@ -1,30 +1,31 @@
-import React, { useContext } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
 
-import Navbar from './components/Navbar/Navbar';
-
+import Navigation from './components/Navigation/Navigation';
+import Home from './pages/Home/Home';
 import Discover from './pages/Discover/Discover';
-import Movie from './pages/Movie/Movie';
-import NotFound from './pages/NotFound/NotFound';
 
 const App = () => {
   return (
     <div>
-      <Navbar />
-      <div className='container'>
+      <Navigation />
+      <div className='container' style={{
+        paddingBottom: 50
+      }}>
         <Switch>
           <Route exact path='/'>
+            <Link to='/discover/movie/page/1'>Go to Discover</Link>
+            <Home />
+          </Route>
+          <Route exact path='/discover/movie/page/:page'>
             <Discover />
           </Route>
-          <Route exact path='/discover/movie'>
-            <Discover />
-          </Route>
-          <Route exact path='/movie/:movie_id'>
+          {/* <Route exact path='/movie/:movie_id'>
             <Movie />
           </Route>
           <Route>
             <NotFound />
-          </Route>
+          </Route> */}
         </Switch>
       </div>
     </div>

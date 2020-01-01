@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-
-import debounce from "lodash.debounce";
-
+import { Card } from 'react-bootstrap';
+import Button from '../../components/Button/Button';
 import styles from './Discover.module.scss';
-import { css } from "@emotion/core";
-import { ClipLoader } from "react-spinners";
 
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: #6200ee;
-`;
+const API_KEY = '8d5e081a30c6a90602920729b5a9a439';
+const URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}`;
 
 class Discover extends Component {
   constructor (props) {
@@ -19,65 +14,98 @@ class Discover extends Component {
     this.state = {
       movies: [],
       isLoading: false,
-      page: 1,
+      page: parseInt(this.props.match.params.page),
       error: false,
       hasMore: true,
+      sortBy: 'popularity.desc',
+      total_pages: 0
     };
-    window.onscroll = debounce(() => {
-
-      if (
-        window.innerHeight + document.documentElement.scrollTop
-        === document.documentElement.offsetHeight
-      ) {
-        this.setState({ page: this.state.page + 1 }, () => this.loadPage());
-      }
-    }, 100);
   }
-  componentDidMount () {
-    this.loadPage();
-  }
-  loadPage = () => {
+  fetch = () => {
     this.setState({ loading: true });
     axios
-      .get(`https://api.themoviedb.org/3/discover/movie?api_key=8d5e081a30c6a90602920729b5a9a439&sort_by=popularity.desc&page=${this.state.page}`)
+      .get(`${URL}&sort_by=${this.state.sortBy}&page=${this.state.page}`)
       .then(response => {
-        if (this.state.page >= response.data.total_pages) {
+        if (this.state.page === response.data.total_pages) {
           this.setState({ hasMore: false });
         }
-        this.setState({ movies: this.state.movies.concat(response.data.results), loading: false });
+        this.setState({ movies: response.data.results, total_pages: response.data.total_pages, loading: false });
       })
       .catch((error) => {
-        this.setState({ error: true });
+        console.log(error);
+        this.setState({ error: true, loading: false });
       });
   }
-  nextPage = () => {
-    this.setState({ page: this.state.page + 1 }, () => this.loadPage());
+  componentDidMount () {
+    this.fetch();
+  }
+  componentDidUpdate(oldProps) {
+    const newProps = this.props;
+    if (parseInt(oldProps.match.params.page) !== parseInt(newProps.match.params.page)) {
+      this.fetch();
+    }
+  }
+  UNSAFE_componentWillReceiveProps(newProps) {
+    const page = parseInt(newProps.match.params.page);
+    this.setState({ page }, () => this.fetch());
   }
   render () {
-    const { movies } = this.state;
     return (
-      <div>
-        <h1>Discover</h1>
-        <ClipLoader
-          css={override}
-          size={"150px"}
-          color={"#123abc"}
-          loading={this.state.isLoading}
-        />
-        {!this.state.hasMore ? <div>Ops, there was an error.</div> : null}
-        <div className={styles.discover}>
-          {movies.map(movie => {
-            return (
-              <div key={movie.id} className={styles.card}>
-                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+      <div className={styles.discover}>
+        <div className={styles.paginator}>
+          <div>
+            {this.state.page === 1 ? null : (
+              <div>
+                <Button handleClick={() => {
+                  this.setState({ page: 1 }, () => {
+                    this.props.history.push(`/discover/movie/page/${this.state.page}`);
+                  });
+                }}>
+                  Go to first
+                </Button>
+                <Button handleClick={() => {
+                  this.setState({ page: this.state.page - 1 }, () => {
+                    this.props.history.push(`/discover/movie/page/${this.state.page}`);
+                  });
+                }}>
+                  Previous
+                </Button>
               </div>
+            )}
+          </div>
+          <div>
+            {this.state.page === 500 ? null : (
+              <div>
+                <Button handleClick={() => {
+                  this.setState({ page: this.state.page + 1 }, () => {
+                    this.props.history.push(`/discover/movie/page/${this.state.page}`);
+                  });
+                }}>
+                  Next
+                </Button>
+                <Button handleClick={() => {
+                  this.setState({ page: this.state.total_pages }, () => {
+                    this.props.history.push(`/discover/movie/page/${this.state.page}`);
+                  });
+                }}>
+                  Go to last
+              </Button>
+            </div>
+            )}
+          </div>
+        </div>
+        <div className={styles.grid}>
+          {this.state.movies.map(movie => {
+            return (
+              <Card className={styles.card} key={movie.id}>
+                <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
+              </Card>
             )
           })}
         </div>
-        {!this.state.hasMore ? <div className={styles.end}>The end.</div> : null}
       </div>
     );
   }
 }
 
-export default Discover;
+export default withRouter(Discover);
