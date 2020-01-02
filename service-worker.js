@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/the-movie-bible/precache-manifest.890189671547df9e44e8daa74d47ed20.js"
+  "/the-movie-bible/precache-manifest.852287005351b53b3947432b87b3d8d6.js"
 );
 
 self.addEventListener('message', (event) => {
