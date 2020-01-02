@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, HashRouter } from 'react-router-dom';
 
 import Navigation from './components/Navigation/Navigation';
 import PagesNavigator from './components/PagesNavigator/PagesNavigator';
@@ -13,21 +13,23 @@ const App = () => {
     <div>
       <Navigation />
       <div className='container'>
-        <PagesNavigator />
-        <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route exact path='/discover/movie/page/:page'>
-            <Discover />
-          </Route>
-          <Route exact path='/movie/:movie_id'>
-            <Movie />
-          </Route>
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
+        <HashRouter basename='/'>
+          <PagesNavigator />
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route exact path='/discover/movie/page/:page'>
+              <Discover />
+            </Route>
+            <Route exact path='/movie/:movie_id'>
+              <Movie />
+            </Route>
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+        </HashRouter>
       </div>
     </div>
   );
