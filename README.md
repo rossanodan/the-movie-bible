@@ -10,10 +10,10 @@ Discover movies by different types of data like average rating, number of votes,
 
 Get the primary information about a movie.
 
-`/genre/{genre_id}` with page equal to a number.
+WORK IN PROGRESS `/genre/{genre_id}` with page equal to a number.
 
 Get the list of official genres for movies.
 
-`/trending/movie/{time_window}` with `time_window` equal to `day` or `week`.
+WORK IN PROGRESS `/trending/movie/{time_window}` with `time_window` equal to `day` or `week`.
 
 Get the daily or weekly trending items.
