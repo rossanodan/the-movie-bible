@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const API_KEY = '8d5e081a30c6a90602920729b5a9a439';
 
+// action creators
 export const fetchMovie = (id) => {
   return (dispatch) => {
     axios

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import * as movieActions from '../../store/actions/'
+import { fetchMovie } from '../../store/actions/'
 
-// import Button from '../../components/Button/Button';
+import Button from '../../components/Button/Button';
 
 import styles from './Movie.module.scss';
 
@@ -13,14 +13,12 @@ class Movie extends Component {
     this.props.fetchMovie(parseInt(this.props.match.params.movie_id));
   }
   extractSpokenLanguages = (spokenLanguages) => {
-    console.log(spokenLanguages);
     const sL = spokenLanguages.map(sL => {
       return ` ${sL['name']}`;
     });
     return sL.toString();
   }
   render () {
-    console.log('this props', this.props);
     return (
       <div className={styles.movie}>
         {this.props.movie ? (
@@ -29,7 +27,7 @@ class Movie extends Component {
               <h1>{this.props.movie.title}</h1>
               <small>{this.props.movie.tagline}</small>
             </div>
-            {/* <div className={styles.genres}>
+            <div className={styles.genres}>
               {this.props.genres.map(genre => (
                 <Button key={genre.id} handleClick={() => {
                   this.props.history.push(`/genre/${genre.id}`);
@@ -37,7 +35,7 @@ class Movie extends Component {
                   {genre.name}
                 </Button>
               ))}
-            </div> */}
+            </div>
             <div className={styles.overview}>
               <p>{this.props.movie.overview}</p>
             </div>
@@ -50,11 +48,11 @@ class Movie extends Component {
             <div className={styles.popularity}>
               <p>Popularity {this.props.movie.popularity}</p>
             </div>
-            {/* <div className={styles.spokenLanguages}>
+            <div className={styles.spokenLanguages}>
               <p>
                 Spoken languages: {this.extractSpokenLanguages(this.props.spokenLanguages)}
               </p>
-            </div> */}
+            </div>
             <div className={styles.media}>
               {this.props.movie.poster_path ? (
                 <div>
@@ -77,12 +75,12 @@ class Movie extends Component {
 const mapStateToProps = (state) => ({
   movie: state.movie,
   genres: state.movie.genres,
-  spokenLanguages: state.movie.spoken_languages
+  spokenLanguages: state.movie.spokenLanguages
 });
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchMovie: (id) => dispatch(movieActions.fetchMovie(id)),
+    fetchMovie: (id) => dispatch(fetchMovie(id)),
   }
 }
 

@@ -1,22 +1,19 @@
 const INITIAL_STATE = {
   movie: {},
   genres: [],
-  spokenLanguages: [],
+  spokenLanguages: []
 };
 
 export default function (state = INITIAL_STATE, action) {
   switch(action.type) {
     case 'FETCH_MOVIE':
-      console.log('Fetch movie', action);
       const genres = action.payload.genres;
       const spokenLanguages = action.payload.spoken_languages;
-      const updatedState = {
+      return {
         ...action.payload,
         genres,
-        spokenLanguages,
+        spokenLanguages
       };
-      console.log('up', updatedState);
-      return updatedState;
     default:
       return state;
   }
