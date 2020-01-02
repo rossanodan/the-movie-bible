@@ -6,14 +6,13 @@ import PagesNavigator from './components/PagesNavigator/PagesNavigator';
 import Home from './pages/Home/Home';
 import Discover from './pages/Discover/Discover';
 import Movie from './pages/Movie/Movie';
+import NotFound from './pages/NotFound/NotFound';
 
 const App = () => {
   return (
     <div>
       <Navigation />
-      <div className='container' style={{
-        paddingBottom: 50
-      }}>
+      <div className='container'>
         <PagesNavigator />
         <Switch>
           <Route exact path='/'>
@@ -25,9 +24,9 @@ const App = () => {
           <Route exact path='/movie/:movie_id'>
             <Movie />
           </Route>
-          {/* <Route>
+          <Route>
             <NotFound />
-          </Route> */}
+          </Route>
         </Switch>
       </div>
     </div>

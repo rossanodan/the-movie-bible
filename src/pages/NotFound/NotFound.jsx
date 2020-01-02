@@ -1,9 +1,19 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-const NotFound = () => {
+import Button from '../../components/Button/Button';
+
+import styles from './NotFound.module.scss';
+
+const NotFound = props => {
   return (
-    <div>Hello NotFound!</div>
+    <div className={styles.notFound}>
+      <p>Page not found.</p>
+      <Button handleClick={() => {
+        props.history.goBack();
+      }}>Go back</Button>
+    </div>
   );
 }
 
-export default NotFound;
+export default withRouter(NotFound);
