@@ -1,0 +1,19 @@
+.movie {
+  padding: 15px;
+  .title {
+    margin-bottom: 10px;
+    h1 {
+      margin: 0;
+    }
+  }
+  .genres {
+    margin-bottom: 10px;
+    button + button {
+      margin-left: 10px;
+    }
+  }
+  .media {
+    display: flex;
+    justify-content: space-between;
+  }
+}

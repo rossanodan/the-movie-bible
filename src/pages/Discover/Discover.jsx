@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import { Card } from 'react-bootstrap';
+import MovieCard from '../../components/MovieCard/MovieCard';
 import Button from '../../components/Button/Button';
 import styles from './Discover.module.scss';
 
@@ -95,13 +95,7 @@ class Discover extends Component {
           </div>
         </div>
         <div className={styles.grid}>
-          {this.state.movies.map(movie => {
-            return (
-              <Card className={styles.card} key={movie.id}>
-                <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
-              </Card>
-            )
-          })}
+          {this.state.movies.map(movie => <MovieCard key={movie.id} {...movie} />)}
         </div>
       </div>
     );

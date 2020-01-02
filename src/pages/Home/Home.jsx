@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Card } from 'react-bootstrap';
+
+import Button from '../../components/Button/Button';
+import MovieCard from '../../components/MovieCard/MovieCard';
+
 import styles from './Home.module.scss';
+import _ from 'lodash';
+import { css } from "@emotion/core";
+import { ClipLoader } from "react-spinners";
 
 const API_KEY = '8d5e081a30c6a90602920729b5a9a439';
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       searchTerm: '',
-      results: []
+      results: [],
+      error: false,
+      errorMessage: null,
+      isLoading: false
     };
   }
   handleChange = (e) => {
@@ -18,32 +32,43 @@ class Home extends Component {
       this.search(this.state.searchTerm);
     });
   }
-  // improve the searching system
-  // search only once finished writing the searchTerm
-  search = (searchTerm) => {
+  search = _.debounce(searchTerm => {
+    this.setState({ isLoading: true });
     if (searchTerm === '') {
-      this.setState({ results: [] });
+      this.setState({ results: [], isLoading: false });
       return;
     }
     axios
       .get(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchTerm}`)
       .then(response => {
-        this.setState({ results: response.data.results });
+        this.setState({ results: response.data.results, isLoading: false });
       })
       .catch(error => {
-        console.log('error', error);
+        console.log(error);
+        this.setState({ error: true, errorMessage: error, isLoading: false });
       });
-  }
+  }, 1000);
   render () {
     return (
       <div className={styles.home}>
-        <input className={styles.search} placeholder="Search movie..." type='text' onChange={this.handleChange} value={this.state.searchTerm} />
+        <div className={styles.searchBar}>
+          <input className={styles.search} placeholder="Search movie..." type='text' onChange={this.handleChange} value={this.state.searchTerm} />
+          <Button handleClick={() => {
+            this.setState({ searchTerm: '', results: [] });
+          }}>
+            Clear
+          </Button>
+        </div>
+        <ClipLoader
+          css={override}
+          size={150}
+          color={"#123abc"}
+          loading={this.state.isLoading}
+        />
         <div className={styles.grid}>
           {this.state.results.map(movie => {
             return (
-              <Card className={styles.card} key={movie.id}>
-                <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
-              </Card>
+              <MovieCard key={movie.id} {...movie} />
             )
           })}
         </div>

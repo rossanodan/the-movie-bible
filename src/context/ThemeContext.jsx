@@ -48,9 +48,11 @@ export function ThemeProvider (props) {
 
 // styles
 const lightTheme = [
-  '--background-color: #FFF'
+  '--background-color: #FFF',
+  '--color: #000'
 ];
 
 const darkTheme = [
-  '--background-color: #121212'
+  '--background-color: #121212',  
+  '--color: #FFF'
 ];

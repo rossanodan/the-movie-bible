@@ -1,9 +1,11 @@
 :root {
   --background-color: #FFF;
+  --color: #000;
 }
 
 body {
   background-color: var(--background-color);
+  color: var(--color);
   font-family: 'Roboto', sans-serif;
   margin: 0;
 }
