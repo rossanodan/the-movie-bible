@@ -1,5 +1,7 @@
 # The Movie Bible
 
+![Searching demo](./Demo.gif)
+
 ## Application routing
 
 `/discover/movie/{page}` with page equal to a number, starting from 1.
