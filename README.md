@@ -10,7 +10,7 @@ Discover movies by different types of data like average rating, number of votes,
 
 Get the primary information about a movie.
 
-`/genre/movie/list`
+`/genre/{genre_id}` with page equal to a number.
 
 Get the list of official genres for movies.
 
