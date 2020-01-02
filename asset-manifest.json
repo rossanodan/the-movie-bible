@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/the-movie-bible/static/css/main.fc501e22.chunk.css",
+    "main.js": "/the-movie-bible/static/js/main.26dcb5a5.chunk.js",
+    "main.js.map": "/the-movie-bible/static/js/main.26dcb5a5.chunk.js.map",
+    "runtime-main.js": "/the-movie-bible/static/js/runtime-main.92afa07b.js",
+    "runtime-main.js.map": "/the-movie-bible/static/js/runtime-main.92afa07b.js.map",
+    "static/js/2.9d20a71e.chunk.js": "/the-movie-bible/static/js/2.9d20a71e.chunk.js",
+    "static/js/2.9d20a71e.chunk.js.map": "/the-movie-bible/static/js/2.9d20a71e.chunk.js.map",
+    "index.html": "/the-movie-bible/index.html",
+    "precache-manifest.efd9d5ac6d5978120a295563f56eff2f.js": "/the-movie-bible/precache-manifest.efd9d5ac6d5978120a295563f56eff2f.js",
+    "service-worker.js": "/the-movie-bible/service-worker.js",
+    "static/css/main.fc501e22.chunk.css.map": "/the-movie-bible/static/css/main.fc501e22.chunk.css.map",
+    "static/js/2.9d20a71e.chunk.js.LICENSE": "/the-movie-bible/static/js/2.9d20a71e.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.92afa07b.js",
+    "static/js/2.9d20a71e.chunk.js",
+    "static/css/main.fc501e22.chunk.css",
+    "static/js/main.26dcb5a5.chunk.js"
+  ]
+}
